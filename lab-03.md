@@ -1,7 +1,7 @@
 Lab 03 - Nobel laureates
 ================
-Insert your name here
-Insert date here
+Lily Botha
+02/01/2026
 
 ### Load packages and data
 
