@@ -35,6 +35,20 @@ Remove this text, and add your answer for Exercise 1 here. Add code
 chunks as needed. Don’t forget to label your code chunk. Do not use
 spaces in code chunk labels.
 
+``` r
+nobel_living <- nobel_living %>% mutate(country_us = if_else(country == "USA", "USA", "Other")) #create new variable based on if statement: if country = "USA", set country_us to "USA", if not, set to "Other"
+```
+
+``` r
+nobel_living_science <- nobel_living %>% filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics")) #filter by observations within a specific column (category)
+```
+
+``` r
+nobel_living_science %>% ggplot(mapping = aes(x = country_us, fill = country_us)) + geom_bar() + facet_wrap(~category) + labs(title = "Category of Nobel Prize vs. Location Won", subtitle = "where Nobel laureates were based when they won", x = "Country", fill = "Country") + coord_flip()
+```
+
+![](lab-03_files/figure-gfm/bar_plot-1.png)<!-- -->
+
 ### Exercise 4
 
 …
