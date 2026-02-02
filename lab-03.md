@@ -26,7 +26,11 @@ person/laureate.
 ### Exercise 2
 
 ``` r
-nobel_living <- nobel %>% filter(is.na(died_date), !is.na(country), gender != "org") #create new filtered df
+nobel_living <- nobel %>% 
+  filter(is.na(died_date), 
+         !is.na(country), 
+         gender != "org"
+  )
 ```
 
 ### Exercise 3
@@ -37,15 +41,31 @@ support the Buzzfeed article claim that most living Nobel laureates were
 based in the US when they won their prizes.
 
 ``` r
-nobel_living <- nobel_living %>% mutate(country_us = if_else(country == "USA", "USA", "Other")) #create new variable based on if statement: if country = "USA", set country_us to "USA", if not, set to "Other"
+nobel_living <- nobel_living %>% 
+  mutate(country_us = if_else(country == "USA", "USA", "Other")
+  ) 
+#create new variable based on if statement: if country = "USA", set country_us to "USA", if not, set to "Other"
 ```
 
 ``` r
-nobel_living_science <- nobel_living %>% filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics")) #filter by observations within a specific column (category)
+nobel_living_science <- nobel_living %>% 
+  filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics")
+  ) 
+#filter by observations within a specific column (category)
 ```
 
 ``` r
-nobel_living_science %>% ggplot(mapping = aes(x = country_us, fill = country_us)) + geom_bar() + facet_wrap(~category) + labs(title = "Category of Nobel Prize vs. Location Won", subtitle = "where Nobel laureates were based when they won", x = "Country", fill = "Country") + coord_flip() 
+nobel_living_science %>% 
+  ggplot(aes(x = category, fill = country_us)) + 
+  geom_bar() + 
+  labs(
+    title = "Category of Nobel Prize vs. Location Won",
+    subtitle = "where Nobel laureates were based when they won", 
+    x = "Country", 
+    y = "Frequency", 
+    fill = "Country"
+  ) + 
+  coord_flip()
 ```
 
 ![](lab-03_files/figure-gfm/bar_plot-1.png)<!-- -->
@@ -53,7 +73,9 @@ nobel_living_science %>% ggplot(mapping = aes(x = country_us, fill = country_us)
 ### Exercise 4
 
 ``` r
-born_country_us <- nobel_living_science %>% mutate(born_country_us = if_else(born_country == "USA", "USA", "Other"))
+born_country_us <- nobel_living_science %>% 
+  mutate(born_country_us = if_else(born_country == "USA", "USA", "Other")
+  )
 ```
 
 …
