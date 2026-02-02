@@ -31,9 +31,10 @@ nobel_living <- nobel %>% filter(is.na(died_date), !is.na(country), gender != "o
 
 ### Exercise 3
 
-Remove this text, and add your answer for Exercise 1 here. Add code
-chunks as needed. Don’t forget to label your code chunk. Do not use
-spaces in code chunk labels.
+There are a substantial amount of Chemistry, Medicine, and Physics Nobel
+prizes that were won in countries other than the US. This doesn’t
+support the Buzzfeed article claim that most living Nobel laureates were
+based in the US when they won their prizes.
 
 ``` r
 nobel_living <- nobel_living %>% mutate(country_us = if_else(country == "USA", "USA", "Other")) #create new variable based on if statement: if country = "USA", set country_us to "USA", if not, set to "Other"
@@ -44,12 +45,16 @@ nobel_living_science <- nobel_living %>% filter(category %in% c("Physics", "Medi
 ```
 
 ``` r
-nobel_living_science %>% ggplot(mapping = aes(x = country_us, fill = country_us)) + geom_bar() + facet_wrap(~category) + labs(title = "Category of Nobel Prize vs. Location Won", subtitle = "where Nobel laureates were based when they won", x = "Country", fill = "Country") + coord_flip()
+nobel_living_science %>% ggplot(mapping = aes(x = country_us, fill = country_us)) + geom_bar() + facet_wrap(~category) + labs(title = "Category of Nobel Prize vs. Location Won", subtitle = "where Nobel laureates were based when they won", x = "Country", fill = "Country") + coord_flip() 
 ```
 
 ![](lab-03_files/figure-gfm/bar_plot-1.png)<!-- -->
 
 ### Exercise 4
+
+``` r
+born_country_us <- nobel_living_science %>% mutate(born_country_us = if_else(born_country == "USA", "USA", "Other"))
+```
 
 …
 
