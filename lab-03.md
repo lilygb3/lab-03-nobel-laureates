@@ -79,7 +79,24 @@ born_country_us <- nobel_living_science %>%
   )
 ```
 
+``` r
+born_country_us %>% count(born_country_us)
+```
+
+    ## # A tibble: 2 × 2
+    ##   born_country_us     n
+    ##   <chr>           <int>
+    ## 1 Other             123
+    ## 2 USA               105
+
 ### Exercise 5
+
+``` r
+# still need to fix this
+born_country_us %>% ggplot() + geom_bar(aes(x = country_us, fill = born_country_us), position = "fill") + facet_wrap(~category)
+```
+
+![](lab-03_files/figure-gfm/add_to_bar_plot-1.png)<!-- -->
 
 …
 
