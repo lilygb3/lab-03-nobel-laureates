@@ -35,46 +35,50 @@ nobel_living <- nobel %>%
 
 ### Exercise 3
 
-There are a substantial amount of Chemistry, Medicine, and Physics Nobel prizes that were won in countries other than the US. This doesn't support the Buzzfeed article claim that most living Nobel laureates were based in the US when they won their prizes. 
+It looks like most Nobel laureates were based in the US when they won their prize, but physics, medicine, and chemistry awards are almost evenly split between the US and other countries. The plot looks very similar to the Buzzfeed article.
 
 ```{r country_us}
+#create new variable based on if statement: if country = "USA", set country_us to "USA", if not, set to "Other"
 nobel_living <- nobel_living %>% 
   mutate(country_us = if_else(country == "USA", "USA", "Other")
   ) 
-#create new variable based on if statement: if country = "USA", set country_us to "USA", if not, set to "Other"
 ```
 
 ```{r science}
+#filter by observations within a specific column (category)
 nobel_living_science <- nobel_living %>% 
   filter(category %in% c("Physics", "Medicine", "Chemistry", "Economics")
   ) 
-#filter by observations within a specific column (category)
 ```
 
 ```{r bar_plot}
 nobel_living_science %>% 
   ggplot(aes(x = category, fill = country_us)) + 
-  geom_bar() + 
-  labs(
-    title = "Category of Nobel Prize vs. Location Won",
-    subtitle = "where Nobel laureates were based when they won", 
-    x = "Country", 
-    y = "Frequency", 
-    fill = "Country"
+  geom_bar(position = "fill") + 
+  labs(title = "Category of Nobel Prize vs. Location Won", 
+       subtitle = "where Nobel laureates were based when they won", 
+       x = "Category", 
+       y = "Frequency", 
+       fill = "Country"
   ) + 
   coord_flip()
 ```
 
 ### Exercise 4
+
+105 living Nobel prize winners were born in the US. 
+
 ```{r born_country_us}
 born_country_us <- nobel_living_science %>% 
   mutate(born_country_us = if_else(born_country == "USA", "USA", "Other")
   )
 ```
 
-...
-
 ### Exercise 5
+
+```{r add_to_bar_plot}
+
+```
 
 ...
 
