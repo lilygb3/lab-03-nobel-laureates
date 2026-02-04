@@ -56,11 +56,11 @@ nobel_living_science <- nobel_living %>%
 
 ``` r
 nobel_living_science %>% 
-  ggplot(aes(x = category, fill = country_us)) + 
-  geom_bar(position = "fill") + 
-  labs(title = "Category of Nobel Prize vs. Location Won", 
-       subtitle = "where Nobel laureates were based when they won", 
-       x = "Category", 
+  ggplot(aes(x = country_us, fill = country_us)) + 
+  geom_bar() + 
+  facet_wrap(~category) +
+  labs(title = "Where Nobel Laureates Win their Awards by Category", 
+       x = "Country", 
        y = "Frequency", 
        fill = "Country"
   ) + 
@@ -92,8 +92,15 @@ born_country_us %>% count(born_country_us)
 ### Exercise 5
 
 ``` r
-# still need to fix this
-born_country_us %>% ggplot() + geom_bar(aes(x = country_us, fill = born_country_us), position = "fill") + facet_wrap(~category)
+born_country_us %>% ggplot() + 
+  geom_bar(aes(x = country_us, fill = born_country_us)) + 
+  facet_wrap(~category) + 
+  labs(title = "Where Nobel Laureates Are Born vs. Where They Win by Category", 
+       x = "Country", 
+       y = "Frequency", 
+       fill = "Country"
+  ) +
+  coord_flip()
 ```
 
 ![](lab-03_files/figure-gfm/add_to_bar_plot-1.png)<!-- -->
