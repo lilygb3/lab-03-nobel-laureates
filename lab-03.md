@@ -15,9 +15,6 @@ nobel <- read_csv("data/nobel.csv")
 
 ## Exercises
 
-Here is a link to the [lab
-instructions](https://datascience4psych.github.io/DataScience4Psych/lab03.html).
-
 ### Exercise 1
 
 There are 935 observations and 26 variables. Each row represents a
@@ -91,22 +88,50 @@ born_country_us %>% count(born_country_us)
 
 ### Exercise 5
 
+According to the plot, most awards won in the US were from laureates
+born in the US. Most awards won in other countries were from laureates
+born in other countries. This does not support the Buzzfeed article
+claim that many awards won in the US were from laureates born outside
+the US.
+
 ``` r
 born_country_us %>% ggplot() + 
   geom_bar(aes(x = country_us, fill = born_country_us)) + 
   facet_wrap(~category) + 
   labs(title = "Where Nobel Laureates Are Born vs. Where They Win by Category", 
-       x = "Country", 
+       x = "Country Where Award Was Won", 
        y = "Frequency", 
-       fill = "Country"
+       fill = "Home Country"
   ) +
   coord_flip()
 ```
 
 ![](lab-03_files/figure-gfm/add_to_bar_plot-1.png)<!-- -->
 
-…
-
 ### Exercise 6
 
-…
+Most immigrant Nobel laureates who won their prize in the US were born
+in either Germany or the United Kingdom.
+
+``` r
+born_country_us %>% 
+  filter(country_us == "USA", 
+         born_country_us == "Other") %>% 
+  count(born_country, 
+        sort = TRUE)
+```
+
+    ## # A tibble: 21 × 2
+    ##    born_country       n
+    ##    <chr>          <int>
+    ##  1 Germany            7
+    ##  2 United Kingdom     7
+    ##  3 China              5
+    ##  4 Canada             4
+    ##  5 Japan              3
+    ##  6 Australia          2
+    ##  7 Israel             2
+    ##  8 Norway             2
+    ##  9 Austria            1
+    ## 10 Finland            1
+    ## # ℹ 11 more rows
